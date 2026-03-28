@@ -498,6 +498,7 @@ You can customize the appearance and behavior of the top languages card using th
 | `custom_title` | Sets a custom title for the card. | string | `Most Used Languages` |
 | `disable_animations` | Disables all animations in the card. | boolean | `false` |
 | `hide_progress` | Uses the compact layout option, hides percentages, and removes the bars. | boolean | `false` |
+| `exclude_notebooks` | Excludes `Jupyter Notebook` from language stats. | boolean | `false` |
 | `size_weight` | Configures language stats algorithm (see [Language stats algorithm](#language-stats-algorithm)). | integer | `1` |
 | `count_weight` | Configures language stats algorithm (see [Language stats algorithm](#language-stats-algorithm)). | integer | `0` |
 | `stats_format` | Switches between two available formats for language's stats `percentages` and `bytes`. | enum | `percentages` |
@@ -537,6 +538,14 @@ You can use `&hide=language1,language2` parameter to hide individual languages.
 
 ```md
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&hide=javascript,html)
+```
+
+### Exclude Jupyter notebooks
+
+You can use `&exclude_notebooks=true` to remove `Jupyter Notebook` from the language calculation.
+
+```md
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&exclude_notebooks=true)
 ```
 
 ### Show more languages

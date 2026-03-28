@@ -22,6 +22,7 @@ export default async (req, res) => {
   const {
     username,
     hide,
+    exclude_notebooks,
     hide_title,
     hide_border,
     card_width,
@@ -118,6 +119,11 @@ export default async (req, res) => {
   }
 
   try {
+    const hiddenLanguages = parseArray(hide);
+    if (parseBoolean(exclude_notebooks)) {
+      hiddenLanguages.push("Jupyter Notebook");
+    }
+
     const topLangs = await fetchTopLanguages(
       username,
       parseArray(exclude_repo),
@@ -139,7 +145,7 @@ export default async (req, res) => {
         hide_title: parseBoolean(hide_title),
         hide_border: parseBoolean(hide_border),
         card_width: parseInt(card_width, 10),
-        hide: parseArray(hide),
+        hide: hiddenLanguages,
         title_color,
         text_color,
         bg_color,

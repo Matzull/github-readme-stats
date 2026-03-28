@@ -126,6 +126,29 @@ describe("Test /api/top-langs", () => {
     );
   });
 
+  it("should hide Jupyter Notebook when exclude_notebooks is enabled", async () => {
+    const req = {
+      query: {
+        username: "anuraghazra",
+        exclude_notebooks: "true",
+      },
+    };
+    const res = {
+      setHeader: jest.fn(),
+      send: jest.fn(),
+    };
+    mock.onPost("https://api.github.com/graphql").reply(200, data_langs);
+
+    await topLangs(req, res);
+
+    expect(res.setHeader).toHaveBeenCalledWith("Content-Type", "image/svg+xml");
+    expect(res.send).toHaveBeenCalledWith(
+      renderTopLanguages(langs, {
+        hide: ["Jupyter Notebook"],
+      }),
+    );
+  });
+
   it("should render error card on user data fetch error", async () => {
     const req = {
       query: {
